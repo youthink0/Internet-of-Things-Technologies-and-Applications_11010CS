@@ -7,18 +7,9 @@ import IOT_socket
 
 col = ['P', 'week', 'month', 'date', 'time', 'year', 'sec', 'Application', 'valid']
 inputdata = ["9.0","Thu","Dec","23","22:55:59","2021","1640271360","lamp","Y"]
-def socket_conn_Pi():
-    HOST = '0.0.0.0'
-    PORT = 7000
-
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.settimeout(10)
-    s.connect((HOST, PORT))
-    
-    return s
 
 if __name__ == "__main__":  
-    s = socket_conn_Pi()
+    s = IOT_socket.socket_conn_Pi()
     while True:
         
         for i in range(5):
