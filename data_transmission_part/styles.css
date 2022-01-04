@@ -1,0 +1,7 @@
+ul, li, h1{
+    color: red;
+    background-color: yellow;
+}
+.highlight{
+    color: green;
+}

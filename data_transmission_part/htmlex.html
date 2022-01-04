@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>IOT_Final_Project</title>
+    <meta charset="UTF-8">
+    <!--refresh web in 5 second-->
+    <meta http-equiv="refresh" content="3600"/>
+    <!--load css-->
+    <link rel="stylesheet" href="styles.css">
+    <!--load javascript-->
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>first version</h1>
+    </header>
+    
+    <nav>
+       <ul>
+           <li><a href="file:///home/youthink/notebook/IOT_final_project/data_transmission_part/htmlex.html" onchange="initialize()">Home</a></li>
+           <li><a href="https://github.com/youthink0/Internet-of-Things-Technologies-and-Applications_11010CS" target="_blank">Projects Link</a></li>
+       </ul>
+    </nav>
+    
+    <div>
+        <p>my mama has <span class="highlight">100</span> sons</p>
+        
+        <select id="dates" onchange="print_date_message()" autocomplete="off">
+            <option value="" selected>請選擇欲查詢日期</option>
+            <option value="today">today</option>
+            <option value="yesterday">yesterday</option> 
+        </select>
+        <p id="message" ></p>
+        <img src="" id="imageBox"/>
+    </div>   
+    <footer>
+        <p><b>
+Internet-of-Things-Technologies-and-Applications_11010CS</b></p>
+    </footer>
+  </body>
+</html>
