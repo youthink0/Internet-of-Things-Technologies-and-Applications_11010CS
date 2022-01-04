@@ -22,6 +22,7 @@ def get_all_pic_and_today_df(path, today):
         for sheet_name in xls.sheet_names:  #get sheet_name
             df1 = pd.read_excel(xls, sheet_name=sheet_name)
             df = get_electricity_information(df1) #put electricity information into df
+            #print(df1.dtypes)
 
             month_tmp = datetime.datetime.strptime(df["month"][0], "%b")
             sheet_date = str(df['year'][0])+"-"+str(month_tmp.month)+"-"+str(df['date'][0])
@@ -29,14 +30,15 @@ def get_all_pic_and_today_df(path, today):
             tmp = datetime.datetime.strptime(sheet_date, "%Y-%m-%d")
             week_ago_date = (tmp + datetime.timedelta(days=-1)).strftime("%a %b %d")
             week_ago_date = week_ago_date.replace("0", " ") #find week ago's sheet name
-            print(week_ago_date)
+            print(sheet_date, tmp, week_ago_date, today)
 
             df_week_ago1 = pd.DataFrame()
             if week_ago_date in xls.sheet_names:
                 df_week_ago1 = pd.read_excel(xls, sheet_name=week_ago_date)
                 #print(df_week_ago.head(2))
             df_week_ago = get_electricity_information(df_week_ago1) #put electricity information into df
-
+		
+            
             if str(today) == sheet_name:
                 df_res = df1
                 df_week_ago_res = df_week_ago1

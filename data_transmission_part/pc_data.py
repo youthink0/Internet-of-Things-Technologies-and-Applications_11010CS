@@ -28,6 +28,7 @@ if __name__ == "__main__":
             conn.close()
             print('client closed connection.')
             break
+        
         df_string = indata.decode()
         #print(df_string)
         tmp = json.loads(df_string)
@@ -37,12 +38,20 @@ if __name__ == "__main__":
         df_again = pd.DataFrame.from_dict(tmp)
         #print(df_again)
         today_df = pd.concat([today_df, df_again], ignore_index=True)
+        
         tmp_df = preprocess.get_electricity_information(today_df)
-
-        draw_chart.export_line_chart(tmp_df, today_week_ago_df, today_date)
-        draw_chart.export_pie_chart(tmp_df, "supply_use", today_date)
-        draw_chart.export_pie_chart(tmp_df, "time_use", today_date)
-
+        tmp_df["P"] = tmp_df["P"].astype(float)
+        if not tmp_df.empty:
+            draw_chart.export_line_chart(tmp_df, today_week_ago_df, today_date)
+            draw_chart.export_pie_chart(tmp_df, "supply_use", today_date)
+            draw_chart.export_pie_chart(tmp_df, "time_use", today_date)
+        
+        tmp_day = datetime.datetime.now().strftime("%Y-%m-%d")
+        if tmp_day != today_date:
+            today_df.to_excel('data_storage/pandas_simple.xlsx', sheet_name=str(today)) 
+            today_df = today_df[0:0]
+            today = datetime.datetime.now().strftime("%a %b %d")
+            today = today.replace("0", " ")
         #outdata = 'echo ' + indata.decode()
         outdata = 'data echo confirmed'
         conn.send(outdata.encode())

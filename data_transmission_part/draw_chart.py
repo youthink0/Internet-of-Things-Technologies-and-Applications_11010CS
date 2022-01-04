@@ -3,7 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def export_line_chart(df, df_week_ago, today):
-    ax = df.plot(x='time', y = 'supply_use', kind = 'line', c = "r", style=".-", label="today", rot=45, grid=False)
+    ax = df.plot(x='time', y = 'P', kind = 'line', c = "r", style=".-", label="today", rot=45, grid=False)
     
     # 設定圖例，參數為標籤、位置
     ax.legend(loc = 'best')
@@ -16,7 +16,7 @@ def export_line_chart(df, df_week_ago, today):
     if df_week_ago.empty:
         fig = ax.get_figure()
     else:
-        plot = df_week_ago.plot(x='time', y = 'supply_use', kind = 'line', c = "k", style='s-', label="week ago", 
+        plot = df_week_ago.plot(x='time', y = 'P', kind = 'line', c = "k", style='s-', label="week ago", 
                                 ax=ax, rot=45, grid=False) # 將x軸數字旋轉45度，避免文字重疊, 且移除格子
         ma = df_week_ago['supply_use'].rolling(3).mean() #計算均線
         mstd = df_week_ago['supply_use'].rolling(3).std() #計算標準差
@@ -33,9 +33,9 @@ unit_flag = 0
 def absolute_value(val):
     a  = sum(size)*val/100
     if unit_flag:
-        return '{:.1f}%\n({:.2f})min'.format(val, a)
+        return '{:.1f}%\n{:.2f} min'.format(val, a)
     else:
-        return '{:.1f}%\n({:.2f})KJ'.format(val, a)
+        return '{:.1f}%\n{:.2f} KJ'.format(val, a)
     
 def export_pie_chart(df, col, today):
     #pie chart
