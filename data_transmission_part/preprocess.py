@@ -3,6 +3,9 @@ import pandas as pd
 import json
 import draw_chart
 
+col = ['P', 'week', 'month', 'date', 'time', 'year', 'sec', 'Application', 'valid']
+invalid_df = pd.DataFrame([], columns = col)
+
 def get_electricity_information(df):
     if df.empty:
         return df
@@ -14,13 +17,21 @@ def get_electricity_information(df):
     #print(df)
     return df
 
+def get_invalid_information(df):
+    tmp = df[df["valid"] == "N"]
+    if not tmp.empty:
+        global invalid_df
+        invalid_df = pd.concat([invalid_df, tmp], ignore_index=True)
+        draw_chart.draw_table(invalid_df)
+
 def get_all_pic_and_today_df(path, today):
-    df_res = pd.DataFrame()
-    df_week_ago_res = pd.DataFrame()
+    df_res = pd.DataFrame([], columns = col)
+    df_week_ago_res = pd.DataFrame([], columns = col)
     today_date_str = str(today)
     with pd.ExcelFile(path, engine="openpyxl") as xls:
         for sheet_name in xls.sheet_names:  #get sheet_name
             df1 = pd.read_excel(xls, sheet_name=sheet_name)
+            get_invalid_information(df1)
             df = get_electricity_information(df1) #put electricity information into df
             #print(df1.dtypes)
 
@@ -28,7 +39,7 @@ def get_all_pic_and_today_df(path, today):
             sheet_date = str(df['year'][0])+"-"+str(month_tmp.month)+"-"+str(df['date'][0])
 
             tmp = datetime.datetime.strptime(sheet_date, "%Y-%m-%d")
-            week_ago_date = (tmp + datetime.timedelta(days=-1)).strftime("%a %b %d")
+            week_ago_date = (tmp + datetime.timedelta(days=-7)).strftime("%a %b %d")
             week_ago_date = week_ago_date.replace("0", " ") #find week ago's sheet name
             print(sheet_date, tmp, week_ago_date, today)
 

@@ -1,6 +1,8 @@
 import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
+import pytab as pt
+from pandas.plotting import table 
 
 def export_line_chart(df, df_week_ago, today):
     ax = df.plot(x='time', y = 'P', kind = 'line', c = "r", style=".-", label="today", rot=45, grid=False)
@@ -26,7 +28,8 @@ def export_line_chart(df, df_week_ago, today):
         fig = plot.get_figure()
     fig.savefig("picture/"+str(today)+"_Line chart.jpg",   # 儲存圖檔
                 bbox_inches='tight',               # 去除座標軸占用的空間
-                pad_inches=0.0)
+                pad_inches=0.0,
+                transparent=True)
 
 size = []
 unit_flag = 0
@@ -67,8 +70,20 @@ def export_pie_chart(df, col, today):
 
     plt.savefig('picture/'+str(today) + " " + col + " ratio.jpg",   # 儲存圖檔
                 bbox_inches='tight',               # 去除座標軸占用的空間
-                pad_inches=0.0)                    # 去除所有白邊
+                pad_inches=0.0,                    # 去除所有白邊
+                transparent=True)
     plt.close()      # 關閉圖表
 
+def draw_table(df):
+    data = df[["week", "month", "date", "time", "Application"]].astype(str)
+    # DataFrame=>png
+    plt.figure('invalid table')            # 視窗名稱
+    ax = plt.axes(frame_on=False)# 不要額外框線
+    ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
+    ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
+    pd.plotting.table(ax, data, loc='center') #將mytable投射到ax上，且放置於ax的中間
+    plt.savefig('picture/'+ "Invalid Records" + ".jpg", transparent=True)     # 存檔
+    plt.close()
+    
 
 

@@ -14,7 +14,7 @@ function print_date_message()
     const formatYmd = date => date.toISOString().slice(0, 10);
     var now = new Date();
     var day_diff = 1000 * 60 * 60 * 24 * 1;
-    
+    var flag = 1; //if user want to show invalid records table, then flag = 0, otherwise flag = 1
     var e = document.getElementById("dates").value;
      
     //window.alert(date_var);
@@ -60,18 +60,29 @@ function print_date_message()
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
         date = String(formatYmd(d));
     }
-    else
+    else if (e=="7days")
     {
-        var d = new Date(now - day_diff*12);
+        var d = new Date(now - day_diff*6);
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
         date = String(formatYmd(d));
     }
-
-
-    document.getElementById('imageBox').src = "picture/" + date + "_Line chart" + ".jpg"; 
-    document.getElementById('imageBox1').src = "picture/" + date + " supply_use ratio" + ".jpg";
-    document.getElementById('imageBox2').src = "picture/" + date + " time_use ratio" + ".jpg";       
+    else if (e=="invalid")
+    {
+        document.getElementById('table').src = "picture/" + "Invalid Records" + ".jpg";
+        document.getElementById('imageBox').src = ""; 
+        document.getElementById('imageBox1').src = "";
+        document.getElementById('imageBox2').src = "";
+        flag = 0;
+    }
+    
+    if (flag == 1)
+    {
+        document.getElementById('table').src = "";
+        document.getElementById('imageBox').src = "picture/" + date + "_Line chart" + ".jpg"; 
+        document.getElementById('imageBox1').src = "picture/" + date + " supply_use ratio" + ".jpg";
+        document.getElementById('imageBox2').src = "picture/" + date + " time_use ratio" + ".jpg";       
+    }
 }
 
 function initialize()
@@ -79,6 +90,7 @@ function initialize()
     document.getElementById( 
                     "message").innerHTML = "顯示日期 : 無";
     date = "";
+    document.getElementById('table').src = "";
     document.getElementById('imageBox').src = "";
     document.getElementById('imageBox1').src = "";
     document.getElementById('imageBox2').src = "";

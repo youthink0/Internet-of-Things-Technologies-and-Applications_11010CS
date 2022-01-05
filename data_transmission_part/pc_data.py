@@ -42,6 +42,7 @@ if __name__ == "__main__":
         tmp_df = preprocess.get_electricity_information(today_df)
         tmp_df["P"] = tmp_df["P"].astype(float)
         if not tmp_df.empty:
+            preprocess.get_invalid_information(today_df)
             draw_chart.export_line_chart(tmp_df, today_week_ago_df, today_date)
             draw_chart.export_pie_chart(tmp_df, "supply_use", today_date)
             draw_chart.export_pie_chart(tmp_df, "time_use", today_date)

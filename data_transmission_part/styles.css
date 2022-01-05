@@ -5,3 +5,6 @@ ul, li, h1{
 .highlight{
     color: green;
 }
+body{
+    background-image: url("bluebg.jpg");
+}
