@@ -99,14 +99,6 @@ function initialize()
 
 window.onload = function()
 { 
-    var now = new Date();
-    date = String(formatYmd(now)); 
-    
-    document.getElementById('table').src = "";
-    document.getElementById('imageBox').src = "picture/" + date + "_Line chart" + ".png"; 
-    document.getElementById('imageBox1').src = "picture/" + date + " supply_use ratio" + ".png";
-    document.getElementById('imageBox2').src = "picture/" + date + " time_use ratio" + ".png";
-
     print_date_message();
     initialize();
   
