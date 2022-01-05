@@ -4,7 +4,7 @@
     <title>IOT_Final_Project</title>
     <meta charset="UTF-8">
     <!--refresh web in 5 second-->
-    <meta http-equiv="refresh" content="300"/>
+    <meta http-equiv="refresh" content="10"/>
     <!--load css-->
     <link rel="stylesheet" href="styles.css">
     <!--load javascript-->
@@ -12,7 +12,7 @@
   </head>
   <body>
     <header>
-      <h1>first version</h1>
+      <h1>過去7天用電量統計</h1>
     </header>
     
     <nav>
@@ -23,28 +23,31 @@
     </nav>
     
     <div>
-        <p>IOT <span class="highlight">13</span> group</p>
+        <p>IOT group <span class="highlight">13</span></p>
         
         <select id="dates" onchange="print_date_message()" autocomplete="off">
-            <option value="" selected>請選擇欲查詢日期</option>
-            <option value="today">today</option>
+            <option value="">請選擇欲查詢日期</option>
+            <option value="today" selected>today</option>
             <option value="yesterday">yesterday</option> 
+            <option value="2days">2 days ago</option>
             <option value="3days">3 days ago</option>
             <option value="4days">4 days ago</option>
             <option value="5days">5 days ago</option>
             <option value="6days">6 days ago</option>
-            <option value="7days">7 days ago</option>
             <option value="invalid">查詢違規紀錄</option>
         </select>
-        <p id="message" ></p>
-        <img src="" id="table"/>
-        <img src="" id="imageBox"/>
-        <img src="" id="imageBox1"/>
-        <img src="" id="imageBox2"/>
+        <p class="date-message" id="message"></p>
+        <div class="table-container">
+            <img class="overlay" src="" id="table"/>
+        </div>
+        <div class="img-container">
+            <img class="overlay" src="" id="imageBox" style="transform: scale(1); z-index: 0"/>
+            <img class="overlay" src="" id="imageBox1" style="transform: scale(0.8); z-index: 1"/>
+            <img class="overlay" src="" id="imageBox2" style="transform: scale(0.8); z-index: 2"/>
+        </div>
     </div>   
     <footer>
-        <p><b>
-Internet-of-Things-Technologies-and-Applications_11010CS</b></p>
+        <p><b>Internet-of-Things-Technologies-and-Applications_11010CS</b></p>
     </footer>
   </body>
 </html>

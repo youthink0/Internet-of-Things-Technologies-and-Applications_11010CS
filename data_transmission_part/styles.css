@@ -1,10 +1,38 @@
 ul, li, h1{
-    color: red;
-    background-color: yellow;
+    font-weight:bold;
 }
 .highlight{
-    color: green;
+    //color: green;
+    font-weight:bold;
 }
+img{
+    position: relative;
+}
+.table-container {
+    transform: scale(1.6);
+    
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    position: relative; 
+}
+.date-message, option{
+    font-size: 22px;
+}
+.overlay {
+    opacity: 0.7; /* using this to replicate the transparent PNG */
+}
+
 body{
-    background-image: url("bluebg.jpg");
+    //background-image: url("bluebg.jpg");
+    background-color: #F6F5F0;
 }
+
+select {
+        width: 300px;
+        height: 60px;
+        margin: 10px;
+        font-size:22px;
+        position: relative;
+}
+

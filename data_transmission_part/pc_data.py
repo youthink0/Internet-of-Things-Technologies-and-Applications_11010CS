@@ -12,11 +12,11 @@ import preprocess
 if __name__ == "__main__":
     s = IOT_socket.socket_conn_PC()
     
-    today = datetime.datetime.now().strftime("%a %b %d")
-    today = today.replace("0", " ")
+    today = datetime.datetime.now().strftime("%Y-%m-%d")
+    #today = today.replace("0", " ")
 
     #-------need to restart everyday-----------#
-    today_df, today_week_ago_df1, today_date = preprocess.get_all_pic_and_today_df('data_storage/pandas_simple.xlsx', today)
+    today_df, today_week_ago_df1 = preprocess.get_all_pic_and_today_df('data_storage/pandas_simple.xlsx', today)
     today_week_ago_df = preprocess.get_electricity_information(today_week_ago_df1) #put electricity information into df
 
     conn, addr = s.accept()
@@ -43,13 +43,13 @@ if __name__ == "__main__":
         tmp_df["P"] = tmp_df["P"].astype(float)
         if not tmp_df.empty:
             preprocess.get_invalid_information(today_df)
-            draw_chart.export_line_chart(tmp_df, today_week_ago_df, today_date)
-            draw_chart.export_pie_chart(tmp_df, "supply_use", today_date)
-            draw_chart.export_pie_chart(tmp_df, "time_use", today_date)
+            draw_chart.export_line_chart(tmp_df, today_week_ago_df, today)
+            draw_chart.export_pie_chart(tmp_df, "supply_use", today)
+            draw_chart.export_pie_chart(tmp_df, "time_use", today)
         
         tmp_day = datetime.datetime.now().strftime("%Y-%m-%d")
-        if tmp_day != today_date:
-            today_df.to_excel('data_storage/pandas_simple.xlsx', sheet_name=str(today)) 
+        if tmp_day != today:
+            #today_df.to_excel('data_storage/pandas_simple.xlsx', sheet_name=str(today)) 
             today_df = today_df[0:0]
             today = datetime.datetime.now().strftime("%a %b %d")
             today = today.replace("0", " ")

@@ -27,7 +27,6 @@ def get_invalid_information(df):
 def get_all_pic_and_today_df(path, today):
     df_res = pd.DataFrame([], columns = col)
     df_week_ago_res = pd.DataFrame([], columns = col)
-    today_date_str = str(today)
     with pd.ExcelFile(path, engine="openpyxl") as xls:
         for sheet_name in xls.sheet_names:  #get sheet_name
             df1 = pd.read_excel(xls, sheet_name=sheet_name)
@@ -50,15 +49,15 @@ def get_all_pic_and_today_df(path, today):
             df_week_ago = get_electricity_information(df_week_ago1) #put electricity information into df
 		
             
-            if str(today) == sheet_name:
+            if str(today) == tmp:
                 df_res = df1
                 df_week_ago_res = df_week_ago1
-                today_date_str = sheet_date
+                
             else:
-                draw_chart.export_line_chart(df, df_week_ago, sheet_date) #draw line chart
-                draw_chart.export_pie_chart(df, "supply_use", sheet_date) #draw supply_use pie chart
-                draw_chart.export_pie_chart(df, "time_use", sheet_date) #draw time_use pie chart
+                draw_chart.export_line_chart(df, df_week_ago, str(tmp.strftime("%Y-%m-%d"))) #draw line chart
+                draw_chart.export_pie_chart(df, "supply_use", str(tmp.strftime("%Y-%m-%d"))) #draw supply_use pie chart
+                draw_chart.export_pie_chart(df, "time_use", str(tmp.strftime("%Y-%m-%d"))) #draw time_use pie chart
             #print(df)
 
             print("------------------------------------------------------------")
-    return df_res, df_week_ago_res, today_date_str
+    return df_res, df_week_ago_res

@@ -1,7 +1,6 @@
 import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
-import pytab as pt
 from pandas.plotting import table 
 
 def export_line_chart(df, df_week_ago, today):
@@ -11,7 +10,7 @@ def export_line_chart(df, df_week_ago, today):
     ax.legend(loc = 'best')
     ax.set_xlabel("Time", fontweight = "bold")                # 設定x軸標題及粗體
     ax.set_ylabel("Power Supply", fontweight = "bold")    # 設定y軸標題及粗體
-    ax.set_title(label=str(today)+" electric folding line diagram", fontsize = 15, fontweight = "bold", y = 1.1)   
+    ax.set_title(label = "electric folding line diagram", fontsize = 15, fontweight = "bold", y = 1.1)   
     # 設定標題、文字大小、粗體及位置
     ax.set_facecolor('white')
     
@@ -20,13 +19,13 @@ def export_line_chart(df, df_week_ago, today):
     else:
         plot = df_week_ago.plot(x='time', y = 'P', kind = 'line', c = "k", style='s-', label="week ago", 
                                 ax=ax, rot=45, grid=False) # 將x軸數字旋轉45度，避免文字重疊, 且移除格子
-        ma = df_week_ago['supply_use'].rolling(3).mean() #計算均線
-        mstd = df_week_ago['supply_use'].rolling(3).std() #計算標準差
-        plot.fill_between(mstd.index, df_week_ago['supply_use'], ma+1*mstd, color='0.3', alpha=0.2) #draw *1 標準差
+        ma = df_week_ago['P'].rolling(3).mean() #計算均線
+        mstd = df_week_ago['P'].rolling(3).std() #計算標準差
+        plot.fill_between(mstd.index, df_week_ago['P'], ma+1*mstd, color='0.3', alpha=0.2) #draw *1 標準差
         plot.fill_between(mstd.index, ma+1*mstd, ma+2*mstd, color='0.7', alpha=0.2) #draw *2 標準差
         
         fig = plot.get_figure()
-    fig.savefig("picture/"+str(today)+"_Line chart.jpg",   # 儲存圖檔
+    fig.savefig("picture/"+str(today)+"_Line chart.png",   # 儲存圖檔
                 bbox_inches='tight',               # 去除座標軸占用的空間
                 pad_inches=0.0,
                 transparent=True)
@@ -65,10 +64,10 @@ def export_pie_chart(df, col, today):
 
 
     plt.axis('equal')                                          # 使圓餅圖比例相等
-    plt.title(str(today) + " " + col + " ratio", {"fontsize" : 18})  # 設定標題及其文字大小
+    plt.title(col + " ratio", {"fontsize" : 18})  # 設定標題及其文字大小
     plt.legend(loc = "best")                                   # 設定圖例及其位置為最佳
 
-    plt.savefig('picture/'+str(today) + " " + col + " ratio.jpg",   # 儲存圖檔
+    plt.savefig('picture/'+str(today) + " " + col + " ratio.png",   # 儲存圖檔
                 bbox_inches='tight',               # 去除座標軸占用的空間
                 pad_inches=0.0,                    # 去除所有白邊
                 transparent=True)
@@ -78,11 +77,16 @@ def draw_table(df):
     data = df[["week", "month", "date", "time", "Application"]].astype(str)
     # DataFrame=>png
     plt.figure('invalid table')            # 視窗名稱
+    
     ax = plt.axes(frame_on=False)# 不要額外框線
     ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
     ax.yaxis.set_visible(False)  # 隱藏Y軸刻度線
+    #ax.patch.set_facecolor('red')
+    #ax.patch.set_alpha(0.5)
+    
     pd.plotting.table(ax, data, loc='center') #將mytable投射到ax上，且放置於ax的中間
-    plt.savefig('picture/'+ "Invalid Records" + ".jpg", transparent=True)     # 存檔
+    
+    plt.savefig('picture/'+ "Invalid Records" + ".png", transparent=True)     # 存檔
     plt.close()
     
 
