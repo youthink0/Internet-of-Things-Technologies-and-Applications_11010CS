@@ -27,45 +27,51 @@ function print_date_message()
     }
     else if (e=="yesterday")
     {
+        var d = new Date(now - day_diff*1);
+        document.getElementById( 
+                    "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
+        //date = String(formatYmd(d));
+        date = "2022-01-02";    
+    }     
+    else if (e=="2days")
+    {
+        var d = new Date(now - day_diff*2);
+        document.getElementById( 
+                    "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
+        //date = String(formatYmd(d));  
+        date = "2022-01-01";   
+    } 
+    else if (e=="3days")
+    {
         var d = new Date(now - day_diff*3);
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));    
-    }     
-    else if (e=="2days")
+        //date = String(formatYmd(d));
+        date = "2021-12-31";
+    } 
+    else if (e=="4days")
     {
         var d = new Date(now - day_diff*4);
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));     
-    } 
-    else if (e=="3days")
+        //date = String(formatYmd(d));
+        date = "2021-12-30";
+    }
+    else if (e=="5days")
     {
         var d = new Date(now - day_diff*5);
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));
-    } 
-    else if (e=="4days")
+        //date = String(formatYmd(d));
+        date = "2021-12-29";
+    }
+    else if (e=="6days")
     {
         var d = new Date(now - day_diff*6);
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));
-    }
-    else if (e=="5days")
-    {
-        var d = new Date(now - day_diff*7);
-        document.getElementById( 
-                    "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));
-    }
-    else if (e=="6days")
-    {
-        var d = new Date(now - day_diff*8);
-        document.getElementById( 
-                    "message").innerHTML = "顯示日期 : " + String(formatYmd(d));
-        date = String(formatYmd(d));
+        //date = String(formatYmd(d));
+        date = "2021-12-28";
     }
     else if (e=="invalid")
     {
@@ -73,6 +79,7 @@ function print_date_message()
         document.getElementById('imageBox').src = ""; 
         document.getElementById('imageBox1').src = "";
         document.getElementById('imageBox2').src = "";
+        document.getElementById('imageBox3').src = "";
         flag = 0;
     }
     
@@ -81,7 +88,8 @@ function print_date_message()
         document.getElementById('table').src = "";
         document.getElementById('imageBox').src = "picture/" + date + "_Line chart" + ".png"; 
         document.getElementById('imageBox1').src = "picture/" + date + " supply_use ratio" + ".png";
-        document.getElementById('imageBox2').src = "picture/" + date + " time_use ratio" + ".png";       
+        document.getElementById('imageBox2').src = "picture/" + date + " time_use ratio" + ".png";
+        document.getElementById('imageBox3').src = "picture/" + date + "_table" + ".png";       
     }
 }
 
@@ -95,6 +103,7 @@ function initialize()
     document.getElementById('imageBox').src = "";
     document.getElementById('imageBox1').src = "";
     document.getElementById('imageBox2').src = "";
+    document.getElementById('imageBox3').src = "";
 }
 
 window.onload = function()

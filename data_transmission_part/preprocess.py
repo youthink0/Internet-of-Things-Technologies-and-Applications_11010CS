@@ -2,6 +2,7 @@ import datetime
 import pandas as pd
 import json
 import draw_chart
+import os
 
 col = ['P', 'week', 'month', 'date', 'time', 'year', 'sec', 'Application', 'valid']
 invalid_df = pd.DataFrame([], columns = col)
@@ -19,10 +20,15 @@ def get_electricity_information(df):
 
 def get_invalid_information(df):
     tmp = df[df["valid"] == "N"]
+    global invalid_df
+    path = 'picture/'+ "Invalid Records" + ".png"
+    if invalid_df.empty:
+        if os.path.isfile(path):
+            os.remove(path)
     if not tmp.empty:
-        global invalid_df
         invalid_df = pd.concat([invalid_df, tmp], ignore_index=True)
-        draw_chart.draw_table(invalid_df)
+        invalid_df = invalid_df.drop_duplicates(subset=['date', 'time'])
+        draw_chart.draw_table(invalid_df, "Invalid Records")
 
 def get_all_pic_and_today_df(path, today):
     df_res = pd.DataFrame([], columns = col)
@@ -57,6 +63,7 @@ def get_all_pic_and_today_df(path, today):
                 draw_chart.export_line_chart(df, df_week_ago, str(tmp.strftime("%Y-%m-%d"))) #draw line chart
                 draw_chart.export_pie_chart(df, "supply_use", str(tmp.strftime("%Y-%m-%d"))) #draw supply_use pie chart
                 draw_chart.export_pie_chart(df, "time_use", str(tmp.strftime("%Y-%m-%d"))) #draw time_use pie chart
+                draw_chart.draw_table(df1, str(tmp.strftime("%Y-%m-%d"))+"_table")
             #print(df)
 
             print("------------------------------------------------------------")

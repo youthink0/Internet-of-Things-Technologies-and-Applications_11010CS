@@ -46,6 +46,7 @@ if __name__ == "__main__":
             draw_chart.export_line_chart(tmp_df, today_week_ago_df, today)
             draw_chart.export_pie_chart(tmp_df, "supply_use", today)
             draw_chart.export_pie_chart(tmp_df, "time_use", today)
+            draw_chart.export_pie_chart(tmp_df, today)
         
         tmp_day = datetime.datetime.now().strftime("%Y-%m-%d")
         if tmp_day != today:

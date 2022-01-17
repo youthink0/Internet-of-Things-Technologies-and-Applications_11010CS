@@ -73,10 +73,13 @@ def export_pie_chart(df, col, today):
                 transparent=True)
     plt.close()      # 關閉圖表
 
-def draw_table(df):
-    data = df[["week", "month", "date", "time", "Application"]].astype(str)
+def draw_table(df, today):
+    if today == "Invalid Records":
+        data = df[["week", "month", "date", "time", "Application"]].astype(str)
+    else:
+        data = df[["time", "Application"]].astype(str)
     # DataFrame=>png
-    plt.figure('invalid table')            # 視窗名稱
+    plt.figure(today)            # 視窗名稱
     
     ax = plt.axes(frame_on=False)# 不要額外框線
     ax.xaxis.set_visible(False)  # 隱藏X軸刻度線
@@ -86,7 +89,7 @@ def draw_table(df):
     
     pd.plotting.table(ax, data, loc='center') #將mytable投射到ax上，且放置於ax的中間
     
-    plt.savefig('picture/'+ "Invalid Records" + ".png", transparent=True)     # 存檔
+    plt.savefig('picture/' + str(today) + ".png", transparent=True)     # 存檔
     plt.close()
     
 

@@ -8,9 +8,7 @@ ul, li, h1{
 img{
     position: relative;
 }
-.table-container {
-    transform: scale(1.6);
-    
+.invalid-table-container, .daily-table-container{
     margin-left: auto;
     margin-right: auto;
     width: 40%;
