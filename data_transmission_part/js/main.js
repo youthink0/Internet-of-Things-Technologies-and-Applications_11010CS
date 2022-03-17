@@ -23,7 +23,8 @@ function print_date_message()
     {
         document.getElementById( 
                     "message").innerHTML = "顯示日期 : " + String(formatYmd(now)); 
-        date = String(formatYmd(now));    
+        date = String(formatYmd(now));  
+        //date = "2022-01-02";   
     }
     else if (e=="yesterday")
     {
