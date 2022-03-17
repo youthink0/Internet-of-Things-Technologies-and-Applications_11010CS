@@ -13,4 +13,4 @@
 this step can transmitt dataframe to pc_data.py from pi_data.py with socket
 
 ## final product
-![](https://github.com/youthink0/Internet-of-Things-Technologies-and-Applications_11010CS/blob/master/data_transmission_part/picture/final%20product.png)
+![](https://github.com/youthink0/Internet-of-Things-Technologies-and-Applications_11010CS/blob/master/data_transmission_part/picture/final_product.png)
